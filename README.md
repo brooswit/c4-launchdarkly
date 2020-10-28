@@ -1,4 +1,4 @@
-# LaunchDarkly SDK for ComputerCraft (A mod for MineCraft)
+# LaunchDarkly SDK for ComputerCraft (A MineCraft mod)
 
 [![Circle CI](https://circleci.com/gh/brooswit/ld-computercraft-client-sdk/tree/master.svg?style=svg)](https://circleci.com/gh/brooswit/ld-computercraft-client-sdk/tree/master)
 
