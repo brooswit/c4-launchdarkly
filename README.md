@@ -20,7 +20,8 @@ The `LDClient` script can be downloaded using the following:
 
 ```
 local w = fs.open("LDClient", "w")
-w.write(http.get("https://raw.githubusercontent.com/brooswit/ld-computercraft-client-sdk/main/LDClient.lua").readAll())
+local r = http.get("https://raw.githubusercontent.com/brooswit/ld-computercraft-client-sdk/main/LDClient.lua")
+w.write(r.readAll())
 w.close()
 ```
 
