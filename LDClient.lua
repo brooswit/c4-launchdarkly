@@ -1,6 +1,8 @@
 os.loadAPI("json")
 os.loadAPI("base64")
 
+local inf = (1/0)
+
 local LDClientInstance = {
     clientsideId = "",
     currentUser = {},
