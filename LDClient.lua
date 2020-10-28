@@ -15,6 +15,7 @@ function LDClientInstance:__init__(baseClass, clientsideId, currentUser, config)
     self.clientsideId = clientsideId or ""
     self.currentUser  = currentUser  or {}
 
+    config = config or {}
     self.config = {}
     self.config.pollInterval  = config.pollInterval  or 60
     self.config.flushInterval = config.flushInterval or 5
