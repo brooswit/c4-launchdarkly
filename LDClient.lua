@@ -39,17 +39,17 @@ end
 
 function LDClientInstance:variationDetails(variation, fallbackValue)
     self._maybePollAllFlags()
-    local variationDetails = self.allFlags[variation] or fallbackValue
-    self._enqueueVariationEvent(variationDetails, fallbackValue)
+    local details = self.allFlags[variation] or fallbackValue
+    self._enqueueVariationEvent(details, fallbackValue)
     self._maybeFlushAllEvents()
-    return variationDetails
+    return details
 end
 
 function LDClientInstance:variation(variation, fallbackValue)
-    local variationDetails = self.variationDetails(variation, fallbackValue)
+    local details = self.variationDetails(variation, fallbackValue)
     local value = fallbackValue
-    if variationDetails then
-        value = variationDetails.value
+    if details then
+        value = details.value
     end
     return value
 end
