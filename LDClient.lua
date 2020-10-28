@@ -119,10 +119,10 @@ end
 function LDClientInstance:_flushAllEvents()
     local url = self.config.eventsUrl .. "events/bulk/" .. self.clientsideId
     local headers = { [ "Content-Type" ] = "application/json" }
-    local event = json.encode([{
+    local event = json.encode({
         kind = "index",
         user = self._buildUser()
-    }])
+    })
     -- TODO: Summary events
 
     local request = http.post(url, event, headers)
