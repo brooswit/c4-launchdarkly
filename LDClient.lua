@@ -141,6 +141,7 @@ function LDClientInstance:_buildUserObject()
     for key, value in pairs(self.currentUser.custom) do
         user.custom[key] = value
     end
+
     -- overrides
     user.custom.time = os.time()*1000
     user.custom.hour = math.floor(os.time())
