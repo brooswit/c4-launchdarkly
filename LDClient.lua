@@ -159,6 +159,6 @@ end
 
 setmetatable (LDClientInstance, {__call=LDClientInstance.__init__})
 
-init(clientsideId, currentUser)
+function init(clientsideId, currentUser)
     return LDClientInstance (clientsideId, currentUser)
 end
