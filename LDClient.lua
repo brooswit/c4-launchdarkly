@@ -25,7 +25,7 @@ function LDClientInstance:__init__(baseClass, clientsideId, currentUser, config)
     self._lastPoll  = -inf
     self._lastFlush = -inf
 
-    setmetatable ( elf, {__index=LDClientInstance})
+    setmetatable ( self, {__index=LDClientInstance})
 
     return self
 end
