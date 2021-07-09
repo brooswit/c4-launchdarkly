@@ -1,4 +1,4 @@
-os.loadAPI("LDClient")
+os.loadAPI("ldClient")
 
 local ldClient = LDClient.init("YOUR-CLIENTSIDE-ID")
 

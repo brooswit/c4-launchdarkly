@@ -17,8 +17,8 @@ function LDClientInstance:__init__(baseClass, clientsideId, currentUser, config)
 
     config = config or {}
     self.config = {}
-    self.config.pollInterval  = config.pollInterval  or 60
-    self.config.flushInterval = config.flushInterval or 5
+    self.config.pollInterval  = config.pollInterval  or 5 -- 60
+    self.config.flushInterval = config.flushInterval or 15 -- 5
     self.config.baseUrl       = config.baseUrl       or "https://app.launchdarkly.com/"
     self.config.eventsUrl     = config.eventsUrl     or "https://events.launchdarkly.com/"
 
