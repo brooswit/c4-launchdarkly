@@ -1,5 +1,5 @@
-os.loadAPI("json")
-os.loadAPI("base64")
+os.loadAPI("json.lua")
+os.loadAPI("base64.lua")
 
 local inf = (1/0)
 
