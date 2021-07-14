@@ -24,7 +24,7 @@
             "repo":    "ccc-launchdarkly",
             "branch":  "master",
             "path":    "",
-            "filename": "ldClient",
+            "filename": "LDClient",
             "filetype": "lua"
         }
     ]
