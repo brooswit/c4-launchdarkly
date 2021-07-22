@@ -14,7 +14,8 @@ local LDClient = {
     __currentUser = {},
     __flagSettings = {},
     __lastPoll = -inf,
-    __lastFlush = -inf
+    __lastFlush = -inf,
+    __closed = false
 }
 LDClient.__index = LDClient
 
@@ -90,11 +91,10 @@ function LDClient:flush()
     self:__flushAllEvents()
 end
 
-function close()
+function LDClient:close()
     self:flush()
-
-    -- TODO
-    -- ¯\_(ツ)_/¯
+    self.__flagSettings = {}
+    self.__closed = true
 end
 -- private methods
 
@@ -126,6 +126,7 @@ function LDClient:__maybeFlushAllEvents(force)
 end
 
 function LDClient:__fetchAllFlags()
+    if self.__closed then return end
     self.__lastPoll = os.clock()
 
     local user = self:__buildUserObject()
@@ -144,6 +145,7 @@ function LDClient:__fetchAllFlags()
 end
 
 function LDClient:__flushAllEvents()
+    if self.__closed then return end
     self.__lastFlush = os.clock()
 
     local url = self.__config.eventsUrl .. "events/bulk/" .. self.__clientsideId
