@@ -11,8 +11,7 @@ end
 local function load(storeName)
     local storeFileName = buildStoreFileName(storeName)
     local storePaths = buildStorePathList(storeFileName)
-
-    for storePath in storePaths do
+    for k, storePath in pairs(storePaths) do
         local storeExists = fs.exists(storePath)
         if storeExists then
             local file = fs.open(storePath, "r")
