@@ -54,7 +54,7 @@ while true do
 
         print( 'OK!' )
         print( '' )
-        print( 'Will change ' .. option .. ' from "' ..  config[option] .. '" to "' .. value '".')
+        print( 'Will change ' .. option .. ' from "' ..  config[option] .. '" to "' .. value .. '".')
         local confirm = nil
         while confirm ~= 'yes' and confirm ~= 'false' do
             print( 'Confirm change (yes/no): ')
@@ -69,7 +69,7 @@ while true do
         if confirm == 'yes' then
             config[option] = value
             dataStore.set('ldConfig', config)
-            print( 'Changed ' .. option .. ' to "' .. value '".')
+            print( 'Changed ' .. option .. ' to "' .. value .. '".')
         else
             print( 'Change canceled.')
         end
