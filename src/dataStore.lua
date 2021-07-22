@@ -4,13 +4,13 @@ local function buildStoreFileName(storeName)
     return storeName .. '.json'
 end
 
-local function buildStorePathList(storeName)
+local function buildStorePathList(storeFileName)
     return { 'disk/' .. storeFileName, storeFileName }
 end
 
 local function load(storeName)
     local storeFileName = buildStoreFileName(storeName)
-    local storePaths = buildStorePathList(storeName)
+    local storePaths = buildStorePathList(storeFileName)
 
     for storePath in storePaths do
         local storeExists = fs.exists(storePath)
