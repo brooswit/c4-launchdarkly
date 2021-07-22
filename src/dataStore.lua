@@ -17,6 +17,10 @@ local function load(storeName)
             local file = fs.open(storePath, "r")
             if file ~= nil then
                 local storeContents = file.readAll()
+                print ('loaded')
+                print( '===================================================' )
+                print (storeContents)
+                print( '===================================================' )
                 file.close()
                 local store = pcall(json.decode, storeContents)
                 if store ~= nil then
