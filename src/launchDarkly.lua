@@ -145,7 +145,7 @@ function LDClient:__fetchAllFlags()
     print(response)
     sleep(1)
 
-    return json.decode(response)
+    self.__flagSettings = json.decode(response)
 end
 
 function LDClient:__flushAllEvents()
