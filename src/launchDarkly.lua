@@ -47,7 +47,7 @@ function LDClientInstance:identify(user)
 end
 
 function LDClientInstance:variationDetails(variation, fallbackValue)
-    local details = self.allFlagDetails()[variation] or { value: fallbackValue }
+    local details = self.allFlagDetails()[variation] or { value = fallbackValue }
     self.__enqueueVariationEvent(details, fallbackValue)
     self.__maybeFlushAllEvents()
     return details
