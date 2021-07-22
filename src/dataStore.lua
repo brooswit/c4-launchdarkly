@@ -66,6 +66,9 @@ function get(key)
         }
     end
 
+    print ('got')
+    print (cache[key].value)
+
     return cache[key].value
 end
 
