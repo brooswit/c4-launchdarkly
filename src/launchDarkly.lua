@@ -138,10 +138,12 @@ function LDClient:__fetchAllFlags()
     local request = http.get(url)
     if not request then
         printError("Fetching flags failed: (" .. url .. ")")
+        sleep(1)
         return
     end
     local response = request.readAll()
     print(response)
+    sleep(1)
 
     return json.decode(response)
 end
