@@ -22,11 +22,9 @@ local function load(storeName)
                 print (storeContents)
                 print( '===================================================' )
                 file.close()
-                local store = pcall(json.decode, storeContents)
-                if store ~= nil then
-                    if type(store) == 'table' then
-                        return store
-                    end
+                local ran, store = pcall(json.decode, storeContents)
+                if ran and type(store) == 'table' then
+                    return store
                 end
             end
         end
@@ -36,10 +34,9 @@ local function load(storeName)
 end
 
 local function save(storeName, store)
-    local storeText, jsonError = pcall(json.encode, store)
-    if jsonError then
+    local ran, storeText = pcall(json.encode, store)
+    if not ran then
         print('error encoding json')
-        print(jsonError)
         print(storeText)
         storeText = "{}"
     end
