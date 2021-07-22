@@ -24,9 +24,11 @@ local function load(storeName)
                 file.close()
                 local store = pcall(json.decode, storeContents)
                 if store ~= nil then
-                    print ('decoded')
-                    print (store)
-                    return store
+                    if type(store) ~= 'table' then 
+                        print ('decoded')
+                        print (store)
+                        return store
+                    end
                 end
             end
         end
