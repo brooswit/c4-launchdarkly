@@ -57,7 +57,7 @@ while true do
 
     if ldClient ~= nil then
         if config.flagKey ~= "" and config.userKey ~= ""  then
-            ldVariation = ldClient:variation(config.flagKey)
+            ldVariation = ldClient:variation(config.flagKey, 'nil')
         end
     end
 
