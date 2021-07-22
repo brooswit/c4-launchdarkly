@@ -56,10 +56,10 @@ while true do
         print( '' )
         print( 'Will change ' .. option .. ' from "' ..  config[option] .. '" to "' .. value .. '".')
         local confirm = nil
-        while confirm ~= 'yes' and confirm ~= 'false' do
+        while confirm ~= 'yes' and confirm ~= 'no' do
             print( 'Confirm change (yes/no): ')
             confirm = read()
-            if confirm ~= 'yes' and confirm ~= 'false' then
+            if confirm ~= 'yes' and confirm ~= 'no' then
                 print('-- invalid response --')
                 sleep(1)
                 print( '' )
