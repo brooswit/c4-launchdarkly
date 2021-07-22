@@ -41,20 +41,20 @@ end
 
 function LDClientInstance:identify(user)
     self.__currentUser = user
-    self.__enqueueIdentifyEvent()
-    self.__fetchAllFlags()
-    self.__maybeFlushAllEvents()
+    self:__enqueueIdentifyEvent()
+    self:__fetchAllFlags()
+    self:__maybeFlushAllEvents()
 end
 
 function LDClientInstance:variationDetails(flagKey, fallbackValue)
-    local details = self.allFlagDetails()[flagKey] or { value = fallbackValue }
-    self.__enqueueVariationEvent(details, fallbackValue)
-    self.__maybeFlushAllEvents()
+    local details = self:allFlagDetails()[flagKey] or { value = fallbackValue }
+    self:__enqueueVariationEvent(details, fallbackValue)
+    self:__maybeFlushAllEvents()
     return details
 end
 
 function LDClientInstance:variation(flagKey, fallbackValue)
-    local details = self.variationDetails(flagKey, fallbackValue)
+    local details = self:variationDetails(flagKey, fallbackValue)
     local value = fallbackValue
     if details then
         value = details.value
@@ -63,13 +63,13 @@ function LDClientInstance:variation(flagKey, fallbackValue)
 end
 
 function LDClientInstance:allFlagDetails()
-    self.__maybeFetchAllFlags()
+    self:__maybeFetchAllFlags()
     return self.__flagSettings
 end
 
 function LDClientInstance:allFlags()
     local allFlags = {}
-    local allFlagDetails = self.allFlagDetails()
+    local allFlagDetails = self:allFlagDetails()
     
     for flagKey, flagDetails in pairs(allFlagDetails) do
         allFlags[flagKey] = flagDetails.value
@@ -79,16 +79,16 @@ function LDClientInstance:allFlags()
 end
 
 function LDClientInstance:track(metric)
-    self.__enqueueTrackEvent(metric)
-    self.__maybeFlushAllEvents()
+    self:__enqueueTrackEvent(metric)
+    self:__maybeFlushAllEvents()
 end
 
 function LDClientInstance:flush()
-    self.__flushAllEvents()
+    self:__flushAllEvents()
 end
 
 function close()
-    self.flush()
+    self:flush()
 
     -- TODO
     -- ¯\_(ツ)_/¯
@@ -118,14 +118,14 @@ end
 
 function LDClientInstance:__maybeFlushAllEvents(force)
     if force or (self.__lastFlush + self.__config.flushInterval < os.clock()) then
-        self.__flushAllEvents()
+        self:__flushAllEvents()
     end
 end
 
 function LDClientInstance:__fetchAllFlags()
     self.__lastPoll = os.clock()
 
-    local user = self.__buildUserObject()
+    local user = self:__buildUserObject()
     local userString = json.encode(user)
     local userBase64 = base64.encode(userString)
     local url = self.__config.baseUrl .. "sdk/evalx/" .. clientsideId .. "/users/" .. userBase64
@@ -147,7 +147,7 @@ function LDClientInstance:__flushAllEvents()
     local headers = { [ "Content-Type" ] = "application/json" }
     local event = json.encode({
         kind = "index",
-        user = self.__buildUser()
+        user = self:__buildUser()
     })
     -- TODO: Summary events
 

@@ -40,7 +40,7 @@ while true do
     if config.clientSideID ~= prevClientSideID then
         prevClientSideID = config.clientSideID
         if ldClient ~= nil then
-            ldClient.close()
+            ldClient:close()
             ldClient = nil
         end
         if config.clientSideID ~= "" then
@@ -50,14 +50,14 @@ while true do
         if config.userKey ~= prevUserKey then
             prevUserKey = config.userKey
             if ldClient ~= nil then
-                ldClient.identify( { key = config.userKey } )
+                ldClient:identify( { key = config.userKey } )
             end
         end
     end
 
     if ldClient ~= nil then
         if config.flagKey ~= "" and config.userKey ~= ""  then
-            ldVariation = ldClient.variation(config.flagKey)
+            ldVariation = ldClient:variation(config.flagKey)
         end
     end
 
