@@ -112,7 +112,7 @@ end
 
 function LDClientInstance:__maybeFetchAllFlags(force)
     if force or (self.__lastPoll + self.__config.pollInterval < os.clock()) then
-        self.allFlags = self.__fetchAllFlags()
+        self.allFlags = self:__fetchAllFlags()
     end
 end
 
