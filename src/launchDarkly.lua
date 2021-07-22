@@ -164,8 +164,10 @@ function LDClientInstance:__buildUserObject()
     user.key = "" .. (self.__currentUser.key or os.getComputerID())
 
     user.custom = {}
-    for key, value in pairs(self.__currentUser.custom) do
-        user.custom[key] = value
+    if self.__currentUser.custom ~= nil then
+        for key, value in pairs(self.__currentUser.custom) do
+            user.custom[key] = value
+        end
     end
 
     -- overrides
