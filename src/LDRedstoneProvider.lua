@@ -27,7 +27,7 @@ while true do
     print( '' )
     print( 'config:' )
     for configKey, configValue in pairs(defaultConfig) do
-        print( '  ' .. configKey .. ': ' .. configValue )
+        print( '  ' .. configKey .. ': "' .. loadedConfig[configKey] .. '"')
         if loadedConfig[configKey] ~= nil then
             config[configKey] = loadedConfig[configKey]
         else
