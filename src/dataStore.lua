@@ -39,7 +39,8 @@ local function save(storeName, store)
     local storeText, jsonError = pcall(json.encode, store)
     if jsonError then
         print('error encoding json')
-        print(json.encode(jsonError))
+        print(jsonError)
+        print(storeText)
         storeText = "{}"
     end
 
