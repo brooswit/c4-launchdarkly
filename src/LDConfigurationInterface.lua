@@ -39,7 +39,7 @@ while true do
     index = 0
     for configKey, configValue in pairs(defaultConfig) do
         index = index + 1
-        if choice == index then
+        if tonumber(choice) == index then
             option = configKey
         end
     end
