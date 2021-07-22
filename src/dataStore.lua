@@ -19,7 +19,6 @@ local function load(storeName)
                 local storeContents = file.readAll()
                 file.close()
                 local ran, store = pcall(json.decode, storeContents)
-                print(type(store))
                 if ran and type(store) == 'table' then
                     return store
                 end
