@@ -14,7 +14,7 @@ while true do
     print( '===================================================' )
 
     local ldVariation = false
-    local loadedConfig = ldStore.get('ldConfig')
+    local loadedConfig = dataStore.get('ldConfig')
     local config = {}
 
     local defaultConfig = {
