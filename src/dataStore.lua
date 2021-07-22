@@ -62,6 +62,8 @@ function get(key)
 end
 
 function set(key, value)
+    local now = os.clock()
+
     cache[key] = {
         value = value,
         time = now
