@@ -16,7 +16,7 @@ local LDClientInstance = {
     __lastFlush = -inf
 }
 
-local function LDClientInstance:__init__(baseClass, clientsideId, currentUser, config)
+function LDClientInstance:__init__(baseClass, clientsideId, currentUser, config)
     clientsideId = clientsideId or ""
     currentUser  = currentUser  or {}
     config       = config       or {}
