@@ -150,7 +150,7 @@ function LDClient:__flushAllEvents()
     local headers = { [ "Content-Type" ] = "application/json" }
     local event = json.encode({
         kind = "index",
-        user = self:__buildUser()
+        user = self:__buildUserObject()
     })
     -- TODO: Summary events
 
