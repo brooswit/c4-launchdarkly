@@ -9,6 +9,7 @@ while true do
     print( '===================================================' )
 
     local loadedConfig = dataStore.get('ldConfig')
+    print (loadedConfig)
     local config = {}
 
     local defaultConfig = {
