@@ -37,7 +37,6 @@ local function save(storeName, store)
     local storePaths = buildStorePathList(storeName)
 
     for k, storePath in pairs(storePaths) do
-        fileManager.save(storePath, storeText)
         local file = fs.open(storePath, "w")
         if file ~= nil then
             file.write(storeText)
