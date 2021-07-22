@@ -35,7 +35,7 @@ while true do
         end
     end
 
-    // handle config changes
+-- handle config changes
     
     if config.clientSideID ~= prevClientSideID then
         prevClientSideID = config.clientSideID
