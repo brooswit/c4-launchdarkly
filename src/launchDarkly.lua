@@ -7,53 +7,56 @@ local function printError(msg)
     print("[LDClient Error]: " .. msg)
 end
 
-local LDClientInstance = {
+
+local LDClient = {
     __clientsideId = "",
+    __config = {},
     __currentUser = {},
     __flagSettings = {},
-    __config = {},
     __lastPoll = -inf,
     __lastFlush = -inf
 }
+LDClient.__index = LDClient
 
-function LDClientInstance:__init__(baseClass, clientsideId, currentUser, config)
+function LDClient:create(clientsideId, currentUser, config)
     clientsideId = clientsideId or ""
     currentUser  = currentUser  or {}
     config       = config       or {}
 
-    self.__clientsideId = clientsideId
+    local ldClient = {}
+    setmetatable(ldClient, LDClient)
 
-    self.__currentUser  = currentUser
+    ldClient.__clientsideId = clientsideId
 
-    self.__config = {}
-    self.__config.pollInterval  = config.pollInterval  or 5
-    self.__config.flushInterval = config.flushInterval or 30
-    self.__config.baseUrl       = config.baseUrl       or "https://app.launchdarkly.com/"
-    self.__config.eventsUrl     = config.eventsUrl     or "https://events.launchdarkly.com/"
+    ldClient.__currentUser  = currentUser
 
-    self.__lastPoll  = -inf
-    self.__lastFlush = -inf
+    ldClient.__config = {}
+        ldClient.__config.pollInterval  = config.pollInterval  or 5
+        ldClient.__config.flushInterval = config.flushInterval or 30
+        ldClient.__config.baseUrl       = config.baseUrl       or "https://app.launchdarkly.com/"
+        ldClient.__config.eventsUrl     = config.eventsUrl     or "https://events.launchdarkly.com/"
 
-    setmetatable ( self, {__index=LDClientInstance})
+    ldClient.__lastPoll  = -inf
+    ldClient.__lastFlush = -inf
 
-    return self
+    return ldClient
 end
 
-function LDClientInstance:identify(user)
+function LDClient:identify(user)
     self.__currentUser = user
     self:__enqueueIdentifyEvent()
     self:__fetchAllFlags()
     self:__maybeFlushAllEvents()
 end
 
-function LDClientInstance:variationDetails(flagKey, fallbackValue)
+function LDClient:variationDetails(flagKey, fallbackValue)
     local details = self:allFlagDetails()[flagKey] or { value = fallbackValue }
     self:__enqueueVariationEvent(details, fallbackValue)
     self:__maybeFlushAllEvents()
     return details
 end
 
-function LDClientInstance:variation(flagKey, fallbackValue)
+function LDClient:variation(flagKey, fallbackValue)
     local details = self:variationDetails(flagKey, fallbackValue)
     local value = fallbackValue
     if details then
@@ -62,12 +65,12 @@ function LDClientInstance:variation(flagKey, fallbackValue)
     return value
 end
 
-function LDClientInstance:allFlagDetails()
+function LDClient:allFlagDetails()
     self:__maybeFetchAllFlags()
     return self.__flagSettings
 end
 
-function LDClientInstance:allFlags()
+function LDClient:allFlags()
     local allFlags = {}
     local allFlagDetails = self:allFlagDetails()
     
@@ -78,12 +81,12 @@ function LDClientInstance:allFlags()
     return allFlags
 end
 
-function LDClientInstance:track(metric)
+function LDClient:track(metric)
     self:__enqueueTrackEvent(metric)
     self:__maybeFlushAllEvents()
 end
 
-function LDClientInstance:flush()
+function LDClient:flush()
     self:__flushAllEvents()
 end
 
@@ -95,34 +98,34 @@ function close()
 end
 -- private methods
 
-function LDClientInstance:__enqueueIdentifyEvent()
+function LDClient:__enqueueIdentifyEvent()
     -- TODO
     -- ¯\_(ツ)_/¯
 end
 
-function LDClientInstance:__enqueueVariationEvent()
+function LDClient:__enqueueVariationEvent()
     -- TODO
     -- ¯\_(ツ)_/¯
 end
 
-function LDClientInstance:__enqueueTrackEvent()
+function LDClient:__enqueueTrackEvent()
     -- TODO
     -- ¯\_(ツ)_/¯
 end
 
-function LDClientInstance:__maybeFetchAllFlags(force)
+function LDClient:__maybeFetchAllFlags(force)
     if force or (self.__lastPoll + self.__config.pollInterval < os.clock()) then
         self.allFlags = self:__fetchAllFlags()
     end
 end
 
-function LDClientInstance:__maybeFlushAllEvents(force)
+function LDClient:__maybeFlushAllEvents(force)
     if force or (self.__lastFlush + self.__config.flushInterval < os.clock()) then
         self:__flushAllEvents()
     end
 end
 
-function LDClientInstance:__fetchAllFlags()
+function LDClient:__fetchAllFlags()
     self.__lastPoll = os.clock()
 
     local user = self:__buildUserObject()
@@ -140,7 +143,7 @@ function LDClientInstance:__fetchAllFlags()
     return json.decode(response)
 end
 
-function LDClientInstance:__flushAllEvents()
+function LDClient:__flushAllEvents()
     self.__lastFlush = os.clock()
 
     local url = self.__config.eventsUrl .. "events/bulk/" .. self.__clientsideId
@@ -159,7 +162,7 @@ function LDClientInstance:__flushAllEvents()
     local response = request.readAll()
 end
 
-function LDClientInstance:__buildUserObject()
+function LDClient:__buildUserObject()
     local user = {}
     user.key = "" .. (self.__currentUser.key or os.getComputerID())
 
@@ -188,8 +191,8 @@ function LDClientInstance:__buildUserObject()
     return user
 end
 
-setmetatable (LDClientInstance, {__call=LDClientInstance.__init__})
+setmetatable (LDClient, {__call=LDClient.__init__})
 
 function init(clientsideId, currentUser)
-    return LDClientInstance (clientsideId, currentUser)
+    return LDClient:create(clientsideId, currentUser)
 end
