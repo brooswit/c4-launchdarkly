@@ -65,8 +65,10 @@ while true do
     print( 'state:' )
     print( '  ldVariation: ' .. ldVariation )
 
-    for key, side in pairs(redstone.getSides()) do
-        redstone.setOutput(side, ldVariation)
+    if ldVariation == true or ldVariation == false then
+        for key, side in pairs(redstone.getSides()) do
+            redstone.setOutput(side, ldVariation)
+        end
     end
 
     sleep(0)
