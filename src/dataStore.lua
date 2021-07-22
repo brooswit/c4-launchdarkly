@@ -34,7 +34,7 @@ local function save(storeName, store)
     if jsonError then storeText = "{}" end
 
     local storeFileName = buildStoreFileName(storeName)
-    local storePaths = buildStorePathList(storeName)
+    local storePaths = buildStorePathList(storeFileName)
 
     for k, storePath in pairs(storePaths) do
         local file = fs.open(storePath, "w")
