@@ -128,7 +128,7 @@ function LDClientInstance:__fetchAllFlags()
     local user = self:__buildUserObject()
     local userString = json.encode(user)
     local userBase64 = base64.encode(userString)
-    local url = self.__config.baseUrl .. "sdk/evalx/" .. clientsideId .. "/users/" .. userBase64
+    local url = self.__config.baseUrl .. "sdk/evalx/" .. self.__clientsideId .. "/users/" .. userBase64
     
     local request = http.get(url)
     if not request then
@@ -143,7 +143,7 @@ end
 function LDClientInstance:__flushAllEvents()
     self.__lastFlush = os.clock()
 
-    local url = self.__config.eventsUrl .. "events/bulk/" .. self.clientsideId
+    local url = self.__config.eventsUrl .. "events/bulk/" .. self.__clientsideId
     local headers = { [ "Content-Type" ] = "application/json" }
     local event = json.encode({
         kind = "index",
