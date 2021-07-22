@@ -1,61 +1,59 @@
-# LaunchDarkly SDK for ComputerCraft (A MineCraft mod)
+# ComputerCraft <> LaunchDarkly integration
 
-[![Circle CI](https://circleci.com/gh/brooswit/ld-computercraft-client-sdk/tree/master.svg?style=svg)](https://circleci.com/gh/brooswit/ld-computercraft-client-sdk/tree/master)
+AKA the "Minecraft SDK"
 
-## LaunchDarkly overview
+## Background
 
-[LaunchDarkly](https://www.launchdarkly.com) is a feature management platform that serves over 100 billion feature flags daily to help teams build better software, faster. [Get started](https://docs.launchdarkly.com/docs/getting-started) using LaunchDarkly today!
+In Minecraft there are lever items which you can use to control the on/off state of many things. You can use another item called "Redstone Dust" which allows you to basically run wires to control things from a distace. You can open/close doors, turn lights on/off, or even detonate TNT.
 
-[![Twitter Follow](https://img.shields.io/twitter/follow/launchdarkly.svg?style=social&label=Follow&maxAge=2592000)](https://twitter.com/intent/follow?screen_name=launchdarkly)
+Minecraft has a large modding community. One mod called ComputerCraft adds lua-programable computers which you can use instead of lever. You can also make web requests using ComputerCraft, meaning it's possible to communicate with the endpoints that the LaunchDarkly SDK uses.
 
-## Reminder: this is not a supported SDK
+This repository is a is a collection of scripts/libraries for ComputerCraft which allow various interactions between LaunchDarkly and your Minecraft world, and allows you to use LaunchDarkly in your own ComputerCraft Lua scripts.
 
-This SDK is provided as-is and is not supported in any capacity by LaunchDarkly. [Click here to see all SDKs that are officially supported by LaunchDarkly](https://docs.launchdarkly.com/sdk#available-sdks)
+## What this is not
 
-## Getting started
+This may change at some point in the future as I continue to develop this integration, but this should not be considered an example of a proper LaunchDarkly SDK for use in a real production environment, or even anywhere. I won't go into all of the reasons why here, but if you're interested in developing a propper SDK, consult the LaunchDarkly contributors guide here as a first step: https://docs.launchdarkly.com/sdk/concepts/contributors-guide
 
-The ComputerCraft SDK requires that JSON and Base64 libraries are already installed.
+## Requirements
 
-The `LDClient` script can be downloaded using the following:
+### Minecraft
 
-```
-local w = fs.open("LDClient", "w")
-local r = http.get("https://raw.githubusercontent.com/brooswit/ld-computercraft-client-sdk/main/LDClient.lua")
-w.write(r.readAll())
-w.close()
-```
+If you don't have Minecraft, you can purchase it here: 
 
-Once installed, you can initialize and use the SDK. Here is a short example:
+### ComputerCraft
 
-```
-os.loadAPI("LDClient")
-local ldClient = LDClient("YOUR-CLIENTSIDE-ID")
-print(ldClient.variation("YOUR-FLAG-KEY"))
-```
+### Lua Requirements
 
-## Learn more
+I reccomend using CCC to easily install the scripts in this repository and all of their dependencies. CCC is a dependency manager I built. There is no community standard dependency manager, so might as well use mine! To get started with CCC, go here:
 
-Check out our [documentation](https://docs.launchdarkly.com) for in-depth instructions on configuring and using LaunchDarkly.
+There are two requirements that are not included in this repository:
+### JSON
 
-## Testing
+The LD Client needs to encode the user object as JSON, and needs to decode JSON responses from LaunchDarkly.
 
-TODO
+- The LD Client expects there the be a `json.lua` file saved to the computer.
+- The LD Client expects the loaded `json` table to have a `encode` method that returns the first argument encoded as JSON.
+- The LD Client expects the loaded `json` table to have a `decode` method that returns the first argument decoded as a table.
 
-## Contributing
+Tested using: https://github.com/rxi/json.lua/blob/master/json.lua
 
-We encourage pull requests and other contributions from the community. Check out our [contributing guidelines](CONTRIBUTING.md) for instructions on how to contribute to this SDK.
 
-## About LaunchDarkly
+### Base64
 
-* LaunchDarkly is a continuous delivery platform that provides feature flags as a service and allows developers to iterate quickly and safely. We allow you to easily flag your features and manage them from the LaunchDarkly dashboard.  With LaunchDarkly, you can:
-    * Roll out a new feature to a subset of your users (like a group of users who opt-in to a beta tester group), gathering feedback and bug reports from real-world use cases.
-    * Gradually roll out a feature to an increasing percentage of users, and track the effect that the feature has on key metrics (for instance, how likely is a user to complete a purchase if they have feature A versus feature B?).
-    * Turn off a feature that you realize is causing performance problems in production, without needing to re-deploy, or even restart the application with a changed configuration file.
-    * Grant access to certain features based on user attributes, like payment plan (eg: users on the ‘gold’ plan get access to more features than users in the ‘silver’ plan). Disable parts of your application to facilitate maintenance, without taking everything offline.
-* LaunchDarkly provides feature flag SDKs for a wide variety of languages and technologies. Check out [our documentation](https://docs.launchdarkly.com/docs) for a complete list.
-* Explore LaunchDarkly
-    * [launchdarkly.com](https://www.launchdarkly.com/ "LaunchDarkly Main Website") for more information
-    * [docs.launchdarkly.com](https://docs.launchdarkly.com/  "LaunchDarkly Documentation") for our documentation and SDK reference guides
-    * [apidocs.launchdarkly.com](https://apidocs.launchdarkly.com/  "LaunchDarkly API Documentation") for our API documentation
-    * [blog.launchdarkly.com](https://blog.launchdarkly.com/  "LaunchDarkly Blog Documentation") for the latest product updates
-    * [Feature Flagging Guide](https://github.com/launchdarkly/featureflags/  "Feature Flagging Guide") for best practices and strategies
+The LD Client needs to encode the user object as base64 when interacting with the LaunchDarkly SDK endpoints.
+
+- The LD Client expects there the be a `base64.lua` file saved to the computer.
+- The LD Client expects the loaded `base64` table to have a `encode` method that returns the first argument as base64.
+
+Tested using: https://stackoverflow.com/questions/34618946/lua-base64-encode
+
+## Getting Started
+
+### LD Client SDK
+
+### LD Configuration UI
+
+### LD Redstone Provider
+
+### CCC configuration files
+

@@ -1,21 +1,22 @@
 {
+    "main": "LDRedstoneProvider.lua",
     "dependencies": [
         {
             "source":  "github",
             "account": "brooswit",
-            "repo":    "ccc-common",
+            "repo":    "ccc-launchdarkly",
             "branch":  "master",
-            "path":    "",
-            "filename": "json",
-            "filetype": "lua"
+            "path":    "ccc",
+            "filename": "launchDarkly",
+            "filetype": "json"
         },
         {
             "source":  "github",
             "account": "brooswit",
-            "repo":    "ccc-common",
+            "repo":    "ccc-launchdarkly",
             "branch":  "master",
-            "path":    "",
-            "filename": "base64",
+            "path":    "src",
+            "filename": "dataStore",
             "filetype": "lua"
         },
         {
@@ -23,8 +24,8 @@
             "account": "brooswit",
             "repo":    "ccc-launchdarkly",
             "branch":  "master",
-            "path":    "",
-            "filename": "LDClient",
+            "path":    "src",
+            "filename": "LDRedstoneProvider",
             "filetype": "lua"
         }
     ]

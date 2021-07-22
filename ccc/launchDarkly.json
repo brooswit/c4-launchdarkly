@@ -1,0 +1,31 @@
+{
+    "dependencies": [
+        {
+            "source":  "github",
+            "account": "brooswit",
+            "repo":    "ccc-common",
+            "branch":  "master",
+            "path":    "",
+            "filename": "json",
+            "filetype": "lua"
+        },
+        {
+            "source":  "github",
+            "account": "brooswit",
+            "repo":    "ccc-common",
+            "branch":  "master",
+            "path":    "",
+            "filename": "base64",
+            "filetype": "lua"
+        },
+        {
+            "source":  "github",
+            "account": "brooswit",
+            "repo":    "ccc-launchdarkly",
+            "branch":  "master",
+            "path":    "src",
+            "filename": "launchDarkly",
+            "filetype": "lua"
+        }
+    ]
+}

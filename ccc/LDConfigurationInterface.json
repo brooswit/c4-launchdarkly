@@ -1,0 +1,32 @@
+{
+    "main": "LDConfigurationInterface.lua",
+    "dependencies": [
+        {
+            "source":  "github",
+            "account": "brooswit",
+            "repo":    "ccc-launchdarkly",
+            "branch":  "master",
+            "path":    "ccc",
+            "filename": "launchDarkly",
+            "filetype": "json"
+        },
+        {
+            "source":  "github",
+            "account": "brooswit",
+            "repo":    "ccc-launchdarkly",
+            "branch":  "master",
+            "path":    "src",
+            "filename": "dataStore",
+            "filetype": "lua"
+        },
+        {
+            "source":  "github",
+            "account": "brooswit",
+            "repo":    "ccc-launchdarkly",
+            "branch":  "master",
+            "path":    "src",
+            "filename": "LDConfigurationInterface",
+            "filetype": "lua"
+        }
+    ]
+}
