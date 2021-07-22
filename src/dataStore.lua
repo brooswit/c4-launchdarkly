@@ -24,6 +24,8 @@ local function load(storeName)
                 file.close()
                 local store = pcall(json.decode, storeContents)
                 if store ~= nil then
+                    print ('decoded')
+                    print (store)
                     return store
                 end
             end
@@ -65,9 +67,6 @@ function get(key)
             time = now
         }
     end
-
-    print ('got')
-    print (cache[key].value)
 
     return cache[key].value
 end
