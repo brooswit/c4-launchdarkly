@@ -31,7 +31,11 @@ end
 
 local function save(storeName, store)
     local storeText, jsonError = pcall(json.encode, store)
-    if jsonError then storeText = "{}" end
+    if jsonError then
+        print('error encoding json')
+        print(json.encode(jsonError))
+        storeText = "{}"
+    end
 
     local storeFileName = buildStoreFileName(storeName)
     local storePaths = buildStorePathList(storeFileName)
