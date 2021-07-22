@@ -17,10 +17,6 @@ local function load(storeName)
             local file = fs.open(storePath, "r")
             if file ~= nil then
                 local storeContents = file.readAll()
-                print ('loaded')
-                print( '===================================================' )
-                print (storeContents)
-                print( '===================================================' )
                 file.close()
                 local ran, store = pcall(json.decode, storeContents)
                 if ran and type(store) == 'table' then
@@ -36,8 +32,6 @@ end
 local function save(storeName, store)
     local ran, storeText = pcall(json.encode, store)
     if not ran then
-        print('error encoding json')
-        print(storeText)
         storeText = "{}"
     end
 
