@@ -19,6 +19,7 @@ end
 local function load(storeName)
     local storeFileName = buildStoreFileName(storeName)
     local storePaths = buildStorePathList(storeFileName)
+    local store = {}
     for k, storePath in pairs(storePaths) do
         local storeExists = fs.exists(storePath)
         if storeExists then
@@ -26,15 +27,18 @@ local function load(storeName)
             if file ~= nil then
                 local storeContents = file.readAll()
                 file.close()
-                local ran, store = pcall(json.decode, storeContents)
-                if ran and type(store) == 'table' then
-                    return store
+                local ran
+                ran, decodedStore = pcall(json.decode, storeContents)
+                if ran and type(decodedStore) == 'table' then
+                    store = decodedStore
                 end
             end
         end
     end
 
-    return {}
+    this.save(storeName, store)
+
+    return store
 end
 
 local function save(storeName, store)
