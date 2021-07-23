@@ -36,7 +36,7 @@ local function load(storeName)
         end
     end
 
-    self.save(storeName, store)
+    save(storeName, store)
 
     return store
 end
