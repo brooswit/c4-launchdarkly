@@ -19,7 +19,6 @@ while true do
 
     local defaultConfig = {
         clientSideID = "",
-        triggerURL = "",
         flagKey = "",
         userKey = ""
     }
