@@ -33,12 +33,11 @@ local function load(storeName)
                 ran, decodedStore = pcall(json.decode, storeContents)
                 if ran and type(decodedStore) == 'table' then
                     data = decodedStore
+                    save(storeName, data)
                 end
             end
         end
     end
-
-    save(storeName, data)
 
     return data
 end
