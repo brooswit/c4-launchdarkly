@@ -25,7 +25,7 @@
             "repo":    "ccc-launchdarkly",
             "branch":  "master",
             "path":    "src",
-            "filename": "LDConfigurationInterface",
+            "filename": "LDConfigUI",
             "filetype": "lua"
         }
     ]
