@@ -35,7 +35,7 @@ while true do
     end
 
     if prevInput == false and input == true then
-        local request = http.get(config.triggerURL)
+        local request = http.post(config.triggerURL, "")
         if request then
             local response = request.readAll()
         end
