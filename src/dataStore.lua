@@ -5,7 +5,15 @@ local function buildStoreFileName(storeName)
 end
 
 local function buildStorePathList(storeFileName)
-    return { 'disk/' .. storeFileName, storeFileName }
+    local disks = { 'disk', 'disk2', 'disk3', 'disk4', 'disk5' }
+    local pathList = {}
+    for k, disk in pairs(disks) do
+        if fs.exists(disk .. '/') then
+            table.insert(pathList, disk .. '/' .. storeFileName)
+        end
+    end
+    table.insert(pathList, storeFileName)
+    return pathList
 end
 
 local function load(storeName)
