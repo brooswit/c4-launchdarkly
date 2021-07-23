@@ -15,7 +15,8 @@ while true do
         clientSideID = "",
         flagKey = "",
         userKey = "",
-        triggerURL = ""
+        triggerOnURL = "",
+        triggerOffURL = ""
     }
 
     print( '' )
