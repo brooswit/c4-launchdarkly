@@ -15,7 +15,8 @@ while true do
     local config = {}
 
     local defaultConfig = {
-        triggerURL = ""
+        triggerOnURL = "",
+        triggerOffURL = ""
     }
 
     print( '' )
@@ -34,10 +35,16 @@ while true do
         input = input or redstone.getInput(side)
     end
 
-    if prevInput == false and input == true then
-        local request = http.post(config.triggerURL, "")
-        if request then
-            local response = request.readAll()
+    if prevInput ~= input then
+        local url = config.triggerOnURL
+        if not input then
+            url = config.triggerOffURL
+        end
+        if url ~= nil then
+            local request = http.post(url, "")
+            if request then
+                local response = request.readAll()
+            end
         end
     end
 
