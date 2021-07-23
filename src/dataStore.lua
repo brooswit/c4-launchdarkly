@@ -16,6 +16,8 @@ local function buildStorePathList(storeFileName)
     return pathList
 end
 
+local save
+
 local function load(storeName)
     local storeFileName = buildStoreFileName(storeName)
     local storePaths = buildStorePathList(storeFileName)
@@ -41,7 +43,7 @@ local function load(storeName)
     return store
 end
 
-local function save(storeName, store)
+save = function (storeName, store)
     local ran, storeText = pcall(json.encode, store)
     if not ran then
         storeText = "{}"
