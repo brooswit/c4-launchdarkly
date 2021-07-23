@@ -1,6 +1,6 @@
 os.loadAPI( 'dataStore.lua' )
 
-local prevInput = false
+local prevInput = nil
 
 while true do
     term.setBackgroundColor(colours.black)  -- Set the background colour to black.

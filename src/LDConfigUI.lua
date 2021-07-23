@@ -24,7 +24,7 @@ while true do
     local index = 0
     for configKey, configValue in pairs(defaultConfig) do
         index = index + 1
-        print( index .. ' ) Change ' .. configKey .. ' - ["' .. loadedConfig[configKey] .. '"]')
+        print( index .. ' ) Change ' .. configKey .. ' - ["' .. tostring(loadedConfig[configKey]) .. '"]')
         if loadedConfig[configKey] ~= nil then
             config[configKey] = loadedConfig[configKey]
         else
