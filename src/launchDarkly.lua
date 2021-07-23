@@ -133,17 +133,13 @@ function LDClient:__fetchAllFlags()
     local userString = json.encode(user)
     local userBase64 = base64.encode(userString)
     local url = self.__config.baseUrl .. "sdk/evalx/" .. self.__clientsideId .. "/users/" .. userBase64
-    print(url)
 
     local request = http.get(url)
     if not request then
         printError("Fetching flags failed: (" .. url .. ")")
-        sleep(1)
         return
     end
     local response = request.readAll()
-    print(response)
-    sleep(1)
 
     self.__flagSettings = json.decode(response)
 end

@@ -57,19 +57,20 @@ while true do
 
     if ldClient ~= nil then
         if config.flagKey ~= "" and config.userKey ~= ""  then
-            ldVariation = ldClient:variation(config.flagKey, 'nil')
+            ldVariation = ldClient:variation(config.flagKey)
         end
     end
 
     print( '' )
     print( 'state:' )
-    print( '  ldVariation: ' .. ldVariation )
+    print( '  ldVariation: ' .. tostring(ldVariation) )
 
     if ldVariation == true or ldVariation == false then
         for key, side in pairs(redstone.getSides()) do
             redstone.setOutput(side, ldVariation)
         end
     end
+    print( '' )
 
     sleep(0)
 end
