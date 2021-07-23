@@ -13,9 +13,9 @@ while true do
 
     local defaultConfig = {
         clientSideID = "",
-        apiKey = "",
         flagKey = "",
-        userKey = ""
+        userKey = "",
+        triggerURL = ""
     }
 
     print( '' )

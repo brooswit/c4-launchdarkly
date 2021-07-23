@@ -21,7 +21,7 @@ local save
 local function load(storeName)
     local storeFileName = buildStoreFileName(storeName)
     local storePaths = buildStorePathList(storeFileName)
-    local store = {}
+    local data = {}
     for k, storePath in pairs(storePaths) do
         local storeExists = fs.exists(storePath)
         if storeExists then
@@ -32,21 +32,21 @@ local function load(storeName)
                 local ran
                 ran, decodedStore = pcall(json.decode, storeContents)
                 if ran and type(decodedStore) == 'table' then
-                    store = decodedStore
+                    data = decodedStore
                 end
             end
         end
     end
 
-    save(storeName, store)
+    save(storeName, data)
 
-    return store
+    return data
 end
 
-save = function (storeName, store)
-    local ran, storeText = pcall(json.encode, store)
+save = function (storeName, data)
+    local ran, text = pcall(json.encode, data)
     if not ran then
-        storeText = "{}"
+        text = "{}"
     end
 
     local storeFileName = buildStoreFileName(storeName)
@@ -55,7 +55,7 @@ save = function (storeName, store)
     for k, storePath in pairs(storePaths) do
         local file = fs.open(storePath, "w")
         if file ~= nil then
-            file.write(storeText)
+            file.write(text)
             file.close()
         end
     end
@@ -64,7 +64,7 @@ end
 local cache = {}
 local ttl = 5
 
-function get(key)
+function get(key, default)
     local now = os.clock()
 
     if cache[key] == nil or cache[key].time + ttl < now then
@@ -74,7 +74,9 @@ function get(key)
         }
     end
 
-    return cache[key].value
+    local cachedData = cache[key].value
+
+    return cachedData
 end
 
 function set(key, value)

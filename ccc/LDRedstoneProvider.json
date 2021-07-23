@@ -1,5 +1,4 @@
 {
-    "main": "LDRedstoneProvider.lua",
     "dependencies": [
         {
             "source":  "github",
@@ -19,6 +18,7 @@
             "filename": "dataStore",
             "filetype": "lua"
         },
+
         {
             "source":  "github",
             "account": "brooswit",
