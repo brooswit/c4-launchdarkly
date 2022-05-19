@@ -14,7 +14,7 @@ while true do
     print( '                LD REDSTONE PROVIDER               ' )
     print( '===================================================' )
 
-    local ldVariationDetails = false
+    local ldVariationDetails = {value: false}
     local loadedConfig = localStorage.get('ldConfig')
     local config = {}
 
