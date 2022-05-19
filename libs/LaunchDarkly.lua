@@ -1,5 +1,6 @@
-os.loadAPI("c4.lua")
+os.loadAPI("c4")
 c4.loadAPI("base64")
+c4.loadAPI("json")
 
 local inf = (1/0)
 
@@ -129,7 +130,7 @@ function LDClient:__fetchAllFlags()
     self.__lastPoll = os.clock()
 
     local user = self:__buildUserObject()
-    local userString = textutils.serialize(user)
+    local userString = json.parse(user)
     local userBase64 = base64.encode(userString)
     local url = self.__config.baseUrl .. "sdk/evalx/" .. self.__clientsideId .. "/users/" .. userBase64
 
@@ -140,7 +141,7 @@ function LDClient:__fetchAllFlags()
     end
     local response = request.readAll()
 
-    self.__flagSettings = textutils.unserialize(response)
+    self.__flagSettings = json.decode(response)
 end
 
 function LDClient:__flushAllEvents()
@@ -149,7 +150,7 @@ function LDClient:__flushAllEvents()
 
     local url = self.__config.eventsUrl .. "events/bulk/" .. self.__clientsideId
     local headers = { [ "Content-Type" ] = "application/json" }
-    local event = textutils.serialize({
+    local event = json.parse({
         kind = "index",
         user = self:__buildUserObject()
     })
