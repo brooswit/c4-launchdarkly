@@ -132,7 +132,7 @@ function LDClient:__fetchAllFlags()
     local user = self:__buildUserObject()
     local userString = json.encodePretty(user)
     local userBase64 = base64.encode(userString)
-    local url = self.__config.baseUrl .. "sdk/evalx/" .. self.__clientsideId .. "/users/" .. userBase64
+    local url = self.__config.baseUrl .. "sdk/evalx/" .. self.__clientsideId .. "/users/" .. userBase64 .. "?withReasons=true"
 
     local request = http.get(url)
     if not request then
