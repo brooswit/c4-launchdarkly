@@ -15,7 +15,7 @@ while true do
     print( '===================================================' )
 
     local ldVariation = false
-    local loadedConfig = LocalStorage.get('ldConfig')
+    local loadedConfig = localStorage.get('ldConfig')
     local config = {}
 
     local defaultConfig = {
