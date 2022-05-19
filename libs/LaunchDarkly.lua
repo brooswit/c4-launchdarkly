@@ -130,7 +130,7 @@ function LDClient:__fetchAllFlags()
     self.__lastPoll = os.clock()
 
     local user = self:__buildUserObject()
-    local userString = json.parse(user)
+    local userString = json.encodePretty(user)
     local userBase64 = base64.encode(userString)
     local url = self.__config.baseUrl .. "sdk/evalx/" .. self.__clientsideId .. "/users/" .. userBase64
 
@@ -150,7 +150,7 @@ function LDClient:__flushAllEvents()
 
     local url = self.__config.eventsUrl .. "events/bulk/" .. self.__clientsideId
     local headers = { [ "Content-Type" ] = "application/json" }
-    local event = json.parse({
+    local event = json.encodePretty({
         kind = "index",
         user = self:__buildUserObject()
     })
