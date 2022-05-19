@@ -44,7 +44,7 @@ while true do
             ldClient = nil
         end
         if config.clientSideID ~= "" then
-            ldClient = launchDarkly.init( config.clientSideID, { key = config.userKey } )
+            ldClient = LaunchDarkly.init( config.clientSideID, { key = config.userKey } )
         end
     else
         if config.userKey ~= prevUserKey then
