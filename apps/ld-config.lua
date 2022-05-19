@@ -1,4 +1,5 @@
-os.loadAPI( 'dataStore.lua' )
+os.loadAPI( 'c4' )
+c4.loadAPI( 'localStorage' )
 
 while true do
     term.setBackgroundColor(colours.black)  -- Set the background colour to black.
@@ -8,7 +9,7 @@ while true do
     print( '            LD CONFIGURATION INTERFACE             ' )
     print( '===================================================' )
 
-    local loadedConfig = dataStore.get('ldConfig')
+    local loadedConfig = localStorage.get('ldConfig')
     local config = {}
 
     local defaultConfig = {
@@ -16,7 +17,12 @@ while true do
         flagKey = "",
         userKey = "",
         triggerOnURL = "",
-        triggerOffURL = ""
+        triggerOffURL = "",
+        eventName = "",
+        baseUrl = "",
+        eventsUrl = "",
+        pollInterval = "",
+        flushInterval = ""
     }
 
     print( '' )
@@ -69,7 +75,7 @@ while true do
 
         if confirm == 'yes' then
             config[option] = value
-            dataStore.set('ldConfig', config)
+            localStorage.set('ldConfig', config)
             print( 'Changed ' .. option .. ' to "' .. value .. '".')
         else
             print( 'Change canceled.')

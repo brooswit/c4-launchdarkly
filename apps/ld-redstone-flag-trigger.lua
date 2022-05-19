@@ -1,4 +1,5 @@
-os.loadAPI( 'dataStore.lua' )
+os.loadAPI( 'c4' )
+c4.loadAPI( 'localStorage' )
 
 local prevInput = nil
 

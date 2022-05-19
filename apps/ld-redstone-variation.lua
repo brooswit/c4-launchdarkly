@@ -1,5 +1,6 @@
-os.loadAPI( 'launchDarkly.lua' )
-os.loadAPI( 'dataStore.lua' )
+os.loadAPI( 'c4' )
+c4.loadAPI( 'LaunchDarkly' )
+c4.loadAPI( 'localStorage' )
 
 ldClient = nil
 prevClientSideID = nil
@@ -14,7 +15,7 @@ while true do
     print( '===================================================' )
 
     local ldVariation = false
-    local loadedConfig = dataStore.get('ldConfig')
+    local loadedConfig = LocalStorage.get('ldConfig')
     local config = {}
 
     local defaultConfig = {

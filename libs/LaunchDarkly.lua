@@ -1,12 +1,11 @@
-os.loadAPI("json.lua")
-os.loadAPI("base64.lua")
+os.loadAPI("c4.lua")
+c4.loadAPI("base64")
 
 local inf = (1/0)
 
 local function printError(msg)
     print("[LDClient Error]: " .. msg)
 end
-
 
 local LDClient = {
     __clientsideId = "",
@@ -130,7 +129,7 @@ function LDClient:__fetchAllFlags()
     self.__lastPoll = os.clock()
 
     local user = self:__buildUserObject()
-    local userString = json.encode(user)
+    local userString = textutils.serialize(user)
     local userBase64 = base64.encode(userString)
     local url = self.__config.baseUrl .. "sdk/evalx/" .. self.__clientsideId .. "/users/" .. userBase64
 
@@ -141,7 +140,7 @@ function LDClient:__fetchAllFlags()
     end
     local response = request.readAll()
 
-    self.__flagSettings = json.decode(response)
+    self.__flagSettings = textutils.unserialize(response)
 end
 
 function LDClient:__flushAllEvents()
@@ -150,7 +149,7 @@ function LDClient:__flushAllEvents()
 
     local url = self.__config.eventsUrl .. "events/bulk/" .. self.__clientsideId
     local headers = { [ "Content-Type" ] = "application/json" }
-    local event = json.encode({
+    local event = textutils.serialize({
         kind = "index",
         user = self:__buildUserObject()
     })
@@ -176,18 +175,18 @@ function LDClient:__buildUserObject()
     end
 
     -- overrides
-    user.custom.millis = os.day() * 60*60*24*1000 + os.time()*1000
-    user.custom.secondOfMinute = math.floor(os.time()*60*60) % 60
-    user.custom.minuteOfHour = math.floor(os.time()*60) % 60
-    user.custom.hourOfDay = math.floor(os.time())
-    user.custom.dayOfMonth = os.day() % 30
-    user.custom.monthOfYear = math.floor(os.day() / 30) % 12
-    user.custom.year = math.floor(os.day() / 360)
+    -- user.custom.millis = os.day() * 60*60*24*1000 + os.time()*1000
+    -- user.custom.secondOfMinute = math.floor(os.time()*60*60) % 60
+    -- user.custom.minuteOfHour = math.floor(os.time()*60) % 60
+    -- user.custom.hourOfDay = math.floor(os.time())
+    -- user.custom.dayOfMonth = os.day() % 30
+    -- user.custom.monthOfYear = math.floor(os.day() / 30) % 12
+    -- user.custom.year = math.floor(os.day() / 360)
 
     user.custom.clock = os.clock()
 
     for key, side in pairs(redstone.getSides()) do
-        user.custom["redstone_" .. side] = redstone.getInput(side)
+        user.custom["redstone_side_" .. side] = redstone.getInput(side)
     end
 
     return user
@@ -195,6 +194,6 @@ end
 
 setmetatable (LDClient, {__call=LDClient.__init__})
 
-function init(clientsideId, currentUser)
-    return LDClient:create(clientsideId, currentUser)
+function init(clientsideId, currentUser, config)
+    return LDClient:create(clientsideId, currentUser, config)
 end
