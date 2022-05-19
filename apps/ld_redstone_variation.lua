@@ -63,7 +63,7 @@ while true do
 
     print( '' )
     print( 'state:' )
-    print( '  ldVariationDetails: ' .. tostring(ldVariationDetails) )
+    print( '  ldVariationDetails: ' .. textutils.serialize(ldVariationDetails) )
 
     for key, side in pairs(redstone.getSides()) do
         redstone.setOutput(side, ldVariationDetails.value == true)
