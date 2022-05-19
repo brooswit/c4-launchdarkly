@@ -14,7 +14,7 @@ while true do
     print( '                LD REDSTONE PROVIDER               ' )
     print( '===================================================' )
 
-    local ldVariation = false
+    local ldVariationDetails = false
     local loadedConfig = localStorage.get('ldConfig')
     local config = {}
 
@@ -57,16 +57,16 @@ while true do
 
     if ldClient ~= nil then
         if config.flagKey ~= "" and config.userKey ~= ""  then
-            ldVariation = ldClient:variation(config.flagKey)
+            ldVariationDetails = ldClient:variationDetails(config.flagKey)
         end
     end
 
     print( '' )
     print( 'state:' )
-    print( '  ldVariation: ' .. tostring(ldVariation) )
+    print( '  ldVariationDetails: ' .. tostring(ldVariationDetails) )
 
     for key, side in pairs(redstone.getSides()) do
-        redstone.setOutput(side, ldVariation == true)
+        redstone.setOutput(side, ldVariationDetails.value == true)
     end
     print( '' )
 
